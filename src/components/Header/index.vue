@@ -53,7 +53,7 @@ export default {
   name: "Header",
   methods: {
     toSearch() {
-      this.$router.push('/search').then(()=>{})//111
+      this.$router.push('/search').then(()=>{})//1
     }
   }
 };
