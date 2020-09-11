@@ -38,7 +38,7 @@
       </h1>
       <div class="searchArea">
         <form action="###" class="searchForm">
-          <input type="text" id="autocomplete" class="input-error input-xxlarge" />
+          <input type="text" id="autocomplete" class="input-error input-xxlarge" v-model="keyword" />
           <button class="sui-btn btn-xlarge btn-danger"
                  type="button"
                  @click="toSearch">搜索</button>
@@ -51,9 +51,33 @@
 <script>
 export default {
   name: "Header",
+  data() {
+    return {
+      keyword: ''
+    }
+  },
+  mounted() {
+    this.$bus.$on('clearKeyword', () => {
+      this.keyword = ''
+    })
+  },
   methods: {
     toSearch() {
-      this.$router.push('/search')
+      let query = this.$route.query
+
+      let location = {
+        name: 'search',
+        params: {
+          keyword: this.keyword
+        }
+      }
+
+      if(query) {
+        location.query = query
+      }
+
+      this.$router.push(location)
+      
     }
   }
 };

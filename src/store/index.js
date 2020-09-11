@@ -4,6 +4,7 @@ Vue.use(Vuex)
 
 
 import home from './home'
+import search from './search'
 
 // const state = {}
 
@@ -15,6 +16,7 @@ import home from './home'
 
 export default new Vuex.Store({
   modules: {
-    home
+    home,
+    search
   }
 })

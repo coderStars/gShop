@@ -1,21 +1,43 @@
-import { getCartgoryList } from '@/network/home'
+import { getCartgoryList , getBannerList, getFloorList} from '@/network/home'
 
-import { RECEIVECARTGORYLIST } from './contant'
+import { RECEIVECARTGORYLIST ,RECEIVEBANNERLIST, RECEIVEFLOORLIST} from './contant'
 
 const state = {
-  cartgoryList: []
+  cartgoryList: [],
+  bannerList: [],
+  floorList: []
 }
 
 const mutations = {
   [RECEIVECARTGORYLIST] (state, cartgoryList)  {
     state.cartgoryList = cartgoryList
+  },
+  [RECEIVEBANNERLIST] (state, bannerList)  {
+    state.bannerList = bannerList
+  },
+  [RECEIVEFLOORLIST] (state, floorList)  {
+    state.floorList = floorList
   }
 }
 
 const actions = {
   async getCartgoryList({commit}) {
-    let cartgoryList = await getCartgoryList()
-    commit(RECEIVECARTGORYLIST,cartgoryList.data)
+    let result = await getCartgoryList()
+    if(result.code == 200) {
+      commit(RECEIVECARTGORYLIST,result.data)
+    }
+  },
+  async getBannerList({commit}) {
+    let result = await getBannerList()
+    if(result.code == 200) {
+      commit(RECEIVEBANNERLIST, result.data)
+    }
+  },
+  async getFloorList({commit}) {
+    let result = await getFloorList()
+    if(result.code == 200) {
+      commit(RECEIVEFLOORLIST, result.data)
+    }
   }
 }
 

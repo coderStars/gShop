@@ -1,0 +1,14 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.RECEIVEGOODSLISTINFO = exports.RECEIVEFLOORLIST = exports.RECEIVEBANNERLIST = exports.RECEIVECARTGORYLIST = void 0;
+var RECEIVECARTGORYLIST = 'receiveCartgoryList';
+exports.RECEIVECARTGORYLIST = RECEIVECARTGORYLIST;
+var RECEIVEBANNERLIST = 'receiveBannerList';
+exports.RECEIVEBANNERLIST = RECEIVEBANNERLIST;
+var RECEIVEFLOORLIST = 'receiveFloorList';
+exports.RECEIVEFLOORLIST = RECEIVEFLOORLIST;
+var RECEIVEGOODSLISTINFO = 'receiveGoodsListInfo';
+exports.RECEIVEGOODSLISTINFO = RECEIVEGOODSLISTINFO;
