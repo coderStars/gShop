@@ -19,7 +19,7 @@
 
 <script>
 import Swiper from "swiper";
-import "swiper/css/swiper.min.css";
+
 
 export default {
   name: "SliderLoop",
@@ -36,23 +36,23 @@ export default {
       immediate: true,
       handler() {
         this.$nextTick(() => {
-          // console.log(this.swiperList.length, "--nextTick");
-          // console.log(this.$refs.banner, "--nextTick");
-          // new Swiper(this.$refs.banner, {
-          //   loop: true, // 循环模式选项
+          console.log(this.swiperList.length, "--nextTick");
+          console.log(this.$refs.banner, "--nextTick");
+          new Swiper(this.$refs.banner, {
+            loop: true, // 循环模式选项
 
-          //   // 如果需要分页器
-          //   pagination: {
-          //     el: ".swiper-pagination"
-          //   },
+            // 如果需要分页器
+            pagination: {
+              el: ".swiper-pagination"
+            },
 
-          //   // 如果需要前进后退按钮
-          //   navigation: {
-          //     nextEl: ".swiper-button-next",
-          //     prevEl: ".swiper-button-prev"
-          //   },
-          //   cache: false
-          // });
+            // 如果需要前进后退按钮
+            navigation: {
+              nextEl: ".swiper-button-next",
+              prevEl: ".swiper-button-prev"
+            },
+            cache: false
+          });
         });
       }
     }

@@ -13,6 +13,10 @@ var _home = _interopRequireDefault(require("./home"));
 
 var _search = _interopRequireDefault(require("./search"));
 
+var _detail = _interopRequireDefault(require("./detail"));
+
+var _cart = _interopRequireDefault(require("./cart"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 _vue["default"].use(_vuex["default"]);
@@ -24,7 +28,9 @@ _vue["default"].use(_vuex["default"]);
 var _default = new _vuex["default"].Store({
   modules: {
     home: _home["default"],
-    search: _search["default"]
+    search: _search["default"],
+    detail: _detail["default"],
+    cart: _cart["default"]
   }
 });
 

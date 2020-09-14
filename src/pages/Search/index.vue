@@ -38,8 +38,15 @@
           <div class="sui-navbar">
             <div class="navbar-inner filter">
               <ul class="sui-nav">
-                <li class="active">
-                  <a href="#">综合</a>
+                <li :class="{active:sortFlag === '1'}">
+                  <a href="javascript:;" @click="sortGoods('1')">
+                    综合
+                    <i
+                      v-if="sortFlag === '1'"
+                      class="iconfont"
+                      :class="{iconup: sortType === 'asc', icondown: sortType === 'desc'}"
+                    ></i>
+                  </a>
                 </li>
                 <li>
                   <a href="#">销量</a>
@@ -50,11 +57,15 @@
                 <li>
                   <a href="#">评价</a>
                 </li>
-                <li>
-                  <a href="#">价格⬆</a>
-                </li>
-                <li>
-                  <a href="#">价格⬇</a>
+                <li :class="{active:sortFlag === '2'}">
+                  <a href="javascript:;" @click="sortGoods('2')">
+                    价格
+                    <i
+                      v-if="sortFlag === '2'"
+                      class="iconfont"
+                      :class="{iconup: sortType === 'asc', icondown: sortType === 'desc'}"
+                    ></i>
+                  </a>
                 </li>
               </ul>
             </div>
@@ -64,9 +75,12 @@
               <li class="yui3-u-1-5" v-for="(goods, index) in goodsList" :key="index">
                 <div class="list-wrap">
                   <div class="p-img">
-                    <a href="item.html" target="_blank">
+                    <!-- <a href="item.html" target="_blank">
                       <img :src="goods.defaultImg" />
-                    </a>
+                    </a>-->
+                    <router-link :to="'/detail/'+goods.id">
+                      <img :src="goods.defaultImg" />
+                    </router-link>
                   </div>
                   <div class="price">
                     <strong>
@@ -102,39 +116,13 @@
               </li>
             </ul>
           </div>
-          <div class="fr page">
-            <div class="sui-pagination clearfix">
-              <ul>
-                <li class="prev disabled">
-                  <a href="#">«上一页</a>
-                </li>
-                <li class="active">
-                  <a href="#">1</a>
-                </li>
-                <li>
-                  <a href="#">2</a>
-                </li>
-                <li>
-                  <a href="#">3</a>
-                </li>
-                <li>
-                  <a href="#">4</a>
-                </li>
-                <li>
-                  <a href="#">5</a>
-                </li>
-                <li class="dotted">
-                  <span>...</span>
-                </li>
-                <li class="next">
-                  <a href="#">下一页»</a>
-                </li>
-              </ul>
-              <div>
-                <span>共10页&nbsp;</span>
-              </div>
-            </div>
-          </div>
+          <Pagination
+            :currentPage="searchParams.pageNo"
+            :currentSize="searchParams.pageSize"
+            :totalSize="goodsListInfo.total"
+            :continueNum="5"
+            @changePageNum="changePageNum"
+          />
         </div>
       </div>
     </div>
@@ -155,8 +143,8 @@ export default {
         categoryName: "",
         keyword: "",
         order: "1:desc",
-        pageNo: 1,
-        pageSize: 10,
+        pageNo: 5,
+        pageSize: 1,
         props: [],
         trademark: ""
       }
@@ -218,10 +206,33 @@ export default {
     removeProp(index) {
       this.searchParams.props.splice(index, 1);
       this.getGoodsListInfo();
+    },
+    sortGoods(sortParam) {
+      let sortIndex = this.searchParams.order.split(":")[0];
+      let sortType = this.searchParams.order.split(":")[1];
+      let sortObj = {};
+      if (sortParam === sortIndex) {
+        sortObj = `${sortParam}:${sortType === "asc" ? "desc" : "asc"}`;
+      } else {
+        sortObj = `${sortParam}:desc`;
+      }
+      this.searchParams.order = sortObj;
+      this.getGoodsListInfo();
+    },
+    changePageNum(page) {
+      this.searchParams.pageNo = page;
+      this.getGoodsListInfo();
     }
   },
   computed: {
-    ...mapGetters(["goodsList"])
+    ...mapGetters(["goodsList"]),
+    ...mapGetters(["goodsListInfo"]),
+    sortFlag() {
+      return this.searchParams.order.split(":")[0];
+    },
+    sortType() {
+      return this.searchParams.order.split(":")[1];
+    }
   },
   components: {
     SearchSelector

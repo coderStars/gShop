@@ -7,6 +7,8 @@ const Home = ()=> import('@/pages/Home')
 const Login = ()=> import('@/pages/Login')
 const Register = ()=> import('@/pages/Register')
 const Search = ()=> import('@/pages/Search')
+const Detail = ()=> import('@/pages/Detail')
+const AddCartSuccess = ()=> import('@/pages/AddCartSuccess')
 
 let RouterPush = VueRouter.prototype.push
 let RouterReplace = VueRouter.prototype.push
@@ -28,6 +30,14 @@ VueRouter.prototype.replace = function(path, onResolved, onRejected) {
 }
 
 const routes = [
+  {
+    path: '/addcartsuccess',
+    component: AddCartSuccess
+  },
+  {
+    path: '/detail/:goodsId',
+    component: Detail
+  },
   {
     path: '/home',
     component: Home
@@ -59,7 +69,10 @@ const routes = [
 
 const router  = new VueRouter({
   routes,
-  mode: 'hash'
+  mode: 'hash',
+  scrollBehavior (to, from, savedPosition) {
+    return { x: 0, y: 0 }
+  }
 })
 
 export default router

@@ -7,3 +7,10 @@ export const getGoodsListInfo = (searchParams) => {
     data: searchParams
   })
 }
+
+export const getGoodsDetailInfo = (skuId) => {
+  return request({
+    url: `item/${skuId}`,
+    method: 'get'
+  })
+}

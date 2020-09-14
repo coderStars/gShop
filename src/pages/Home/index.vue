@@ -35,6 +35,7 @@ export default {
   methods: {
     getFloorList() {
       this.$store.dispatch("getFloorList");
+      console.log();
     }
   },
   computed: {
